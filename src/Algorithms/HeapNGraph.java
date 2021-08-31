@@ -1,7 +1,5 @@
 package Algorithms;
 
-import javafx.scene.layout.Priority;
-
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;

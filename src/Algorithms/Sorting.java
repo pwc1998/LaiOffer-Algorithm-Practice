@@ -17,7 +17,7 @@ public class Sorting {
 //        printInt((int)object.power(-2,5));
 //        int[] arr = {5, 2, 7, 4, 1, 3, 8, 6, 0};
 //        int[] arr = {1,9,8,3,5};
-        int[] arr = {1,3,0,3,2,3,2,3,0,0,5,0};
+        int[] arr = {1,3,0,3,2,3,2,3,0,0,5,0,0,0,0,0};
 //        printArray(object.selectionSort(new int[] {-1, -3, 7, 4}));
 //        printArray(object.mergeSort(arr));
 //        printArray(object.quickSort(arr));
