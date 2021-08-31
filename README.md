@@ -1,2 +1,2 @@
-# LaiOffer-Algorithm-Pracitce
+# LaiOffer-Algorithm-Practice
  
