@@ -8,11 +8,16 @@ import java.util.PriorityQueue;
 public class HeapNGraph {
 
     public static void main(String[] args) {
-        printInt(5);
+//        printInt(5);
 //        int[] arr = {1,2,3,8,5,6,4,7,9};
         int[] arr = {6,5,4,3,2,1};
+        int[][] matrix = {{1,3,5,7},
+                {2,4,8,9},
+                {3,5,11,15},
+                {6,8,13,18}};
         HeapNGraph obj = new HeapNGraph();
-        printArray(obj.kSmallest(arr, 3));
+//        printArray(obj.kSmallest(arr, 3));
+        printInt(obj.kthSmallest(matrix, 5));
     }
 
     private static void printInt(int num) {
@@ -61,6 +66,29 @@ public class HeapNGraph {
         }
 
         return result;
+    }
+
+    // max-heap implementation
+    // TODO: do a BFS search version!
+    int kthSmallest(int[][] matrix, int k) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.reverseOrder());
+        for(int i = 0; i < matrix.length; i++) {
+            for(int j = 0; j < matrix[0].length; j++) {
+                if(pq.size() == k) {
+                    int num = matrix[i][j];
+                    int peek = pq.peek();
+                    if(num < peek) {
+                        pq.poll();
+                        pq.offer(num);
+                    }
+                }
+                else {
+                    pq.offer(matrix[i][j]);
+                }
+            }
+        }
+
+        return pq.peek();
     }
 
 
