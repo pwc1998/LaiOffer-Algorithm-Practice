@@ -11,7 +11,6 @@ public class HeapNGraph {
 //        printInt(5);
 //        int[] arr = {1,2,3,8,5,6,4,7,9};
         printInt(new Integer(args[0]));
-        printInt(3);
         int[] arr = {6,5,4,3,2,1};
         int[][] matrix = {{1,3,5,7},
                 {2,4,8,9},
