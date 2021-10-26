@@ -22,7 +22,9 @@ public class StringNHashTable {
 //        System.out.println(obj.remove(str, exclude));
 //        printStr(obj.removeSpaces("      abc bbb    d  "));
 //        printStr(obj.deDup(str));
-        printStr(obj.deDupHard("abbbaaccz"));
+//        printStr(obj.deDupHard("abbbaaccz"));
+//        printInt(obj.countWaysToSplitFast("gfgfgfgfgfgfgfgfgfgfgfgfgfgfgf"));  // answer 387
+        printInt(obj.testMod());
     }
     private static void printInt(int num) {
         System.out.println(num);
@@ -37,6 +39,78 @@ public class StringNHashTable {
         System.out.println(bool);
     }
     private static void printStr(String str) { System.out.println(str); }
+
+    int testMod() {
+        long mod = 1_000_000_007;
+        return 1_00;
+    }
+
+    int countWaysToSplitFast(String s) {
+        // using two dividers
+        char[] in = s.toCharArray();
+        int count = 0;
+        for(int i = 0; i < s.length()-2; i++) {
+            for(int j = i+1; j < s.length()-1; j++) {
+                List<String> out = new ArrayList<>();
+                out.add(Arrays.copyOfRange(in, 0, i+1).toString());
+                out.add(Arrays.copyOfRange(in, i+1, j+1).toString());
+                out.add(Arrays.copyOfRange(in, j+1, in.length).toString());
+                if(checkAllDifferent(out)) count++;
+            }
+        }
+        return count;
+    }
+
+    int countWaysToSplit(String s) {
+        List<List<String>> splitted = new ArrayList();
+        List<String> one = new ArrayList();
+        DFSsplit(new StringBuilder(s), 0, one, splitted);
+        // System.out.println(splitted);
+        int count = 0;
+        for(int i = 0; i < splitted.size(); i++) {
+            // System.out.println(splitted.get(i));
+            if(checkAllDifferent(splitted.get(i))) count++;
+        }
+
+        return count;
+    }
+
+    void DFSsplit(StringBuilder s, int level, List<String> oneSplit, List<List<String>> splitted) {
+        // base case
+        if(level == 3) {
+            // System.out.println(oneSplit);
+            splitted.add(new ArrayList(oneSplit));
+            // System.out.println(splitted);
+        }
+        if(level == 2) {
+            oneSplit.add(s.toString());
+            DFSsplit(s, level+1, oneSplit, splitted);
+            oneSplit.remove(oneSplit.size()-1);
+        }
+
+        // recursive step
+        for(int i = 0; i < s.length()-1; i++) {
+            oneSplit.add(s.substring(0, i+1));
+            StringBuilder curr = new StringBuilder(s);
+            DFSsplit(s.delete(0,i+1), level+1, oneSplit, splitted);
+            s = curr;
+            oneSplit.remove(oneSplit.size()-1);
+            // DFSsplit(s.substring(i+1, ), level+1, oneSplit, splitted);
+        }
+    }
+
+    boolean checkAllDifferent(List<String> one) {
+//        System.out.println(one.get(0));
+//        System.out.println(one.get(1));
+//        System.out.println(one.get(2));
+//        System.out.println(one.get(0).equals(one.get(1)));
+//        System.out.println(one.get(2).equals(one.get(1)));
+        String ab = one.get(0) + one.get(1);
+        String bc = one.get(1) + one.get(2);
+        String ca = one.get(2) + one.get(0);
+        if(ab.equals(bc) || bc.equals(ca) || ab.equals(ca)) return false;
+        return true;
+    }
 
     // Top K frequent wor
 //    String[] topKFrequent(String[] combo, int k) {
